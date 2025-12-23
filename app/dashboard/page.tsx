@@ -57,8 +57,16 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {subjects.map((subject) => {
             const Icon = subject.icon;
+            const href =
+              subject.id === 'math'
+                ? '/subjects/math/grade-7'
+                : `/subjects/${subject.id}`;
+            const cta =
+              subject.id === 'math'
+                ? 'View Grade 7 strands and concepts'
+                : 'Tap to view strands and start learning';
             return (
-              <Link key={subject.id} href={`/subjects/${subject.id}`}>
+              <Link key={subject.id} href={href}>
                 <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
                   <CardHeader>
                     <div className="flex items-center gap-4">
@@ -72,9 +80,7 @@ export default async function DashboardPage() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      Tap to view strands and start learning
-                    </p>
+                    <p className="text-sm text-muted-foreground">{cta}</p>
                   </CardContent>
                 </Card>
               </Link>

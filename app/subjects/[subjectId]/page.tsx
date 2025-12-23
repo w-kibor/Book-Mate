@@ -56,6 +56,17 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
           <p className="text-muted-foreground">
             Select a strand to begin learning
           </p>
+
+          {subjectId === 'math' && (
+            <div className="mt-4">
+              <Link
+                href="/subjects/math/grade-7"
+                className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+              >
+                View Grade 7 Mathematics strands overview →
+              </Link>
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

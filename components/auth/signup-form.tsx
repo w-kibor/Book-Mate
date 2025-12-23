@@ -1,17 +1,25 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
-export function LoginForm() {
+export function SignupForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
   const router = useRouter();
   const supabase = createClient();
 
@@ -19,19 +27,30 @@ export function LoginForm() {
     e.preventDefault();
     setIsLoading(true);
     setError('');
+    setMessage('');
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      setIsLoading(false);
+      return;
+    }
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
       });
 
       if (error) throw error;
 
-      router.push('/dashboard');
-      router.refresh();
+      if (data.session) {
+        router.push('/dashboard');
+        router.refresh();
+      } else {
+        setMessage('Check your email to confirm your account, then sign in.');
+      }
     } catch (err: any) {
-      setError(err.message || 'An error occurred');
+      setError(err.message || 'An error occurred during sign up');
     } finally {
       setIsLoading(false);
     }
@@ -40,14 +59,19 @@ export function LoginForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Sign In</CardTitle>
-        <CardDescription>Enter your credentials to access your account</CardDescription>
+        <CardTitle>Create Account</CardTitle>
+        <CardDescription>Sign up to start learning</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
             <div className="bg-destructive/10 text-destructive p-3 rounded-md text-sm">
               {error}
+            </div>
+          )}
+          {message && (
+            <div className="bg-primary/10 text-primary p-3 rounded-md text-sm">
+              {message}
             </div>
           )}
           <div>
@@ -75,21 +99,39 @@ export function LoginForm() {
               onChange={(e) => setPassword(e.target.value)}
               required
               className="w-full px-3 py-2 border border-input rounded-md bg-background"
-              placeholder="••••••••"
+              placeholder="Minimum 6 characters"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="confirmPassword"
+              className="block text-sm font-medium mb-2"
+            >
+              Confirm Password
+            </label>
+            <input
+              id="confirmPassword"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              className="w-full px-3 py-2 border border-input rounded-md bg-background"
+              placeholder="Re-enter password"
             />
           </div>
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? 'Signing in...' : 'Sign In'}
+            {isLoading ? 'Creating account...' : 'Sign Up'}
           </Button>
         </form>
         <p className="mt-4 text-sm text-muted-foreground text-center">
-          Don&apos;t have an account?{' '}
-          <Link href="/signup" className="text-primary hover:underline font-medium">
-            Sign up
+          Already have an account?{' '}
+          <Link href="/login" className="text-primary hover:underline font-medium">
+            Sign in
           </Link>
         </p>
       </CardContent>
     </Card>
   );
 }
+
 
