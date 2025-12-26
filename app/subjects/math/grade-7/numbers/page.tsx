@@ -5,272 +5,232 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { MathRenderer } from '@/components/math/math-renderer';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { BookOpen, ChevronRight } from 'lucide-react';
+
+type Topic = {
+  id: string;
+  title: string;
+};
+
+type SubStrand = {
+  id: string;
+  number: string;
+  title: string;
+  description: string;
+  lessons: number;
+  topics: Topic[];
+};
+
+const subStrands: SubStrand[] = [
+  {
+    id: 'whole-numbers',
+    number: '1.1',
+    title: 'Whole Numbers',
+    description:
+      'Place value, reading/writing numbers, rounding, classification (even/odd/prime), operations, and number sequences.',
+    lessons: 20,
+    topics: [
+      { id: '1.1.1', title: 'Place Value of Digits in a Number' },
+      { id: '1.1.2', title: 'Total value of digits in a number' },
+      { id: '1.1.3', title: 'Reading and Writing Numbers in Symbols' },
+      { id: '1.1.4', title: 'Reading and Writing Numbers in Words' },
+      { id: '1.1.5', title: 'Rounding off Numbers' },
+      { id: '1.1.6', title: 'Natural Numbers. Even and Odd Numbers' },
+      { id: '1.1.7', title: 'Natural Numbers. Prime Numbers' },
+      { id: '1.1.8', title: 'Operations of Whole Numbers. Addition and Subtraction' },
+      { id: '1.1.9', title: 'Operation of Whole Numbers. Multiplication and Division' },
+      { id: '1.1.10', title: 'Operations of Whole Numbers. Combined Operations' },
+      { id: '1.1.11', title: 'Number Sequences' },
+    ],
+  },
+  {
+    id: 'factors',
+    number: '1.2',
+    title: 'Factors',
+    description:
+      'Divisibility tests, prime factorization, Greatest Common Divisor (GCD), and Least Common Multiples (LCM).',
+    lessons: 7,
+    topics: [
+      { id: '1.2.1', title: 'Divisibility test of 2, 3, 4' },
+      { id: '1.2.2', title: 'Divisibility test of 5, 6, 8' },
+      { id: '1.2.3', title: 'Divisibility test of 9, 10, 11' },
+      { id: '1.2.4', title: 'Expressing a Number as a Product of its Prime Factors' },
+      { id: '1.2.5', title: 'Greatest Common Divisor (GCD)' },
+      { id: '1.2.6', title: 'Applying the Greatest Common Divisor (GCD)' },
+      { id: '1.2.7', title: 'Least Common Multiples (LCM)' },
+      { id: '1.2.8', title: 'Applying the Least Common Multiples (LCM)' },
+    ],
+  },
+  {
+    id: 'fractions',
+    number: '1.3',
+    title: 'Fractions',
+    description:
+      'Comparing, adding, subtracting, multiplying, and dividing fractions. Reciprocals and number sequences with fractions.',
+    lessons: 9,
+    topics: [
+      { id: '1.3.1', title: 'Comparing Fractions' },
+      { id: '1.3.2', title: 'Adding Fractions' },
+      { id: '1.3.3', title: 'Subtracting Fractions' },
+      { id: '1.3.4', title: 'Multiplying a fraction by a whole number' },
+      { id: '1.3.5', title: 'Multiplying a fraction by a fraction' },
+      { id: '1.3.6', title: 'Reciprocal of a Fraction' },
+      { id: '1.3.7', title: 'Dividing a fraction by a whole number' },
+      { id: '1.3.8', title: 'Dividing a fraction by a fraction' },
+      { id: '1.3.9', title: 'Dividing a whole number by a fraction' },
+      { id: '1.3.10', title: 'Number Sequences Involving Fractions' },
+    ],
+  },
+  {
+    id: 'decimals',
+    number: '1.4',
+    title: 'Decimals',
+    description:
+      'Place value and total value of decimals, multiplying and dividing decimals by whole numbers and decimals.',
+    lessons: 4,
+    topics: [
+      { id: '1.4.1', title: 'Place Value of Digits in a Decimal' },
+      { id: '1.4.2', title: 'Total Value of Digits in a Decimal' },
+      { id: '1.4.3', title: 'Multiplying a Decimal by a Whole Number' },
+      { id: '1.4.4', title: 'Multiplying a Decimal by a Decimal' },
+      { id: '1.4.5', title: 'Dividing a Decimal by a Whole Number' },
+      { id: '1.4.6', title: 'Dividing a Decimal by a Decimal' },
+    ],
+  },
+  {
+    id: 'squares-square-roots',
+    number: '1.5',
+    title: 'Squares and Square Roots',
+    description:
+      'Finding squares and square roots of whole numbers, fractions, and decimals.',
+    lessons: 5,
+    topics: [
+      { id: '1.5.1', title: 'Squares of Whole Numbers' },
+      { id: '1.5.2', title: 'Squares of Fractions' },
+      { id: '1.5.3', title: 'Squares of Decimals' },
+      { id: '1.5.4', title: 'Square Roots of Whole Numbers' },
+      { id: '1.5.5', title: 'Square Roots of Fractions' },
+      { id: '1.5.6', title: 'Square Roots of Decimals' },
+    ],
+  },
+];
 
 export default function Grade7NumbersPage() {
   return (
-    <section className="space-y-10">
-      {/* Strand intro */}
-      <div className="flex flex-col gap-2">
-        <p className="text-xs font-semibold uppercase tracking-wide text-primary">
-          Strand 1.0
-        </p>
-        <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
+    <section className="space-y-8">
+      {/* Strand Header */}
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center gap-3">
+          <BookOpen className="h-6 w-6 text-primary" />
+          <p className="text-xs font-semibold uppercase tracking-wide text-primary">
+            Strand 1.0
+          </p>
+        </div>
+        <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
           Numbers
         </h2>
         <p className="text-sm text-muted-foreground max-w-3xl">
-          This strand follows <span className="font-semibold">STRAND 1.0:
-          NUMBERS</span> of the Grade 7 Mathematics CBC design. It includes the
-          sub-strands: Whole Numbers, Factors, Fractions, Decimals, and Squares
-          &amp; Square Roots.
+          This strand covers five sub-strands: Whole Numbers, Factors, Fractions,
+          Decimals, and Squares &amp; Square Roots. Each sub-strand is broken down
+          into specific topics that align with the Grade 7 Mathematics CBC curriculum
+          design.
         </p>
       </div>
 
-      {/* Sub-strand 1.1 – Whole Numbers */}
-      <div className="space-y-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-primary">
-            Sub-strand 1.1
-          </p>
-          <h3 className="text-xl md:text-2xl font-semibold text-slate-900">
-            Whole Numbers
-          </h3>
-          <p className="text-sm text-muted-foreground max-w-3xl">
-            Place value and total value up to hundreds of millions, reading and
-            writing numbers in symbols and words, rounding off, classifying
-            numbers (even, odd, prime), operations, and number sequences.
-          </p>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-2">
-          {/* Quick Concept */}
-          <Card className="border-primary/10 shadow-sm">
+      {/* Sub-strands Overview */}
+      <div className="space-y-6">
+        {subStrands.map((subStrand) => (
+          <Card
+            key={subStrand.id}
+            className="border-2 border-primary/20 hover:border-primary/40 transition-colors shadow-sm"
+          >
             <CardHeader>
-              <CardTitle>Quick Concept</CardTitle>
-              <CardDescription className="text-sm">
-                Place Value &amp; Rounding (up to hundreds of millions)
-              </CardDescription>
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded">
+                      Sub-strand {subStrand.number}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {subStrand.lessons} lessons
+                    </span>
+                  </div>
+                  <CardTitle className="text-xl md:text-2xl mb-2">
+                    {subStrand.title}
+                  </CardTitle>
+                  <CardDescription className="text-sm max-w-2xl">
+                    {subStrand.description}
+                  </CardDescription>
+                </div>
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="space-y-2 text-sm leading-relaxed text-muted-foreground">
-                <p>
-                  A digit&apos;s <span className="font-semibold">place
-                  value</span> tells its position (ones, tens, hundreds, …,
-                  millions). The <span className="font-semibold">total
-                  value</span> is the digit &times; its place value.
+              <div className="space-y-3">
+                <p className="text-sm font-semibold text-slate-700">
+                  Topics ({subStrand.topics.length}):
                 </p>
-                <p className="text-primary font-semibold">Example</p>
-                <p>
-                  In the number{' '}
-                  <MathRenderer>{'572\\,648\\,319'}</MathRenderer>:
-                </p>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>
-                    The <span className="font-semibold">7</span> is in the ten
-                    millions place, so its total value is{' '}
-                    <MathRenderer>{'70\\,000\\,000'}</MathRenderer>.
-                  </li>
-                  <li>
-                    The <span className="font-semibold">3</span> is in the tens
-                    place, so its total value is{' '}
-                    <MathRenderer>{'30'}</MathRenderer>.
-                  </li>
-                </ul>
-                <p className="text-primary font-semibold mt-2">
-                  Rounding example
-                </p>
-                <p>
-                  Round <MathRenderer>{'572\\,648\\,319'}</MathRenderer> to the
-                  nearest million. Look at the hundred-thousands digit (6): it
-                  is 5 or more, so we round up:
-                </p>
-                <div>
-                  <MathRenderer display>
-                    {'572\\,648\\,319 \\approx 573\\,000\\,000'}
-                  </MathRenderer>
+                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                  {subStrand.topics.map((topic, index) => (
+                    <div
+                      key={topic.id}
+                      className="group flex items-center gap-2 p-3 rounded-lg border border-slate-200 hover:border-primary/40 hover:bg-primary/5 transition-colors"
+                    >
+                      <span className="text-xs font-mono text-muted-foreground min-w-[3rem]">
+                        {topic.id}
+                      </span>
+                      <span className="text-sm text-slate-700 group-hover:text-primary transition-colors flex-1">
+                        {topic.title}
+                      </span>
+                      <ChevronRight className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                  ))}
+                </div>
+                <div className="pt-2 border-t border-slate-200">
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="w-full sm:w-auto"
+                  >
+                    <Link href={`/subjects/math/grade-7/numbers/${subStrand.id}`}>
+                      Explore {subStrand.title}
+                      <ChevronRight className="h-4 w-4 ml-1" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </CardContent>
           </Card>
-
-          {/* Practice Question */}
-          <Card className="border-primary/10 shadow-sm">
-            <CardHeader>
-              <CardTitle>Practice Question</CardTitle>
-              <CardDescription className="text-sm">
-                Whole numbers &amp; sequences
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ol className="list-decimal list-inside space-y-2 text-sm text-slate-800">
-                <li>
-                  For the number{' '}
-                  <MathRenderer>{'408\\,375\\,962'}</MathRenderer>, write:
-                  <ul className="list-disc list-inside ml-4 space-y-1">
-                    <li>
-                      the place value and total value of the digit{' '}
-                      <span className="font-semibold">8</span>.
-                    </li>
-                    <li>
-                      the number in words.
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  Round{' '}
-                  <MathRenderer>{'408\\,375\\,962'}</MathRenderer> to the nearest
-                  hundred million and to the nearest thousand.
-                </li>
-                <li>
-                  Classify the numbers{' '}
-                  <MathRenderer>{'27,\\; 41,\\; 56,\\; 73'}</MathRenderer> as
-                  even, odd or prime.
-                </li>
-                <li>
-                  Complete the number sequence and describe the rule:
-                  <br />
-                  <MathRenderer>
-                    {'9,\\; 18,\\; 27,\\; 36,\\; \\square,\\; \\square'}
-                  </MathRenderer>
-                </li>
-              </ol>
-              <div className="mt-3 text-xs text-muted-foreground">
-                Tip: Encourage learners to use place value charts, number cards
-                and simple digital tools to explore very large numbers and
-                patterns.
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Learning outcomes & competencies */}
-        <div className="grid gap-4 md:grid-cols-2">
-          <Card className="border-primary/10 bg-white/60">
-            <CardHeader>
-              <CardTitle className="text-sm">
-                Learning Outcomes &amp; Experiences
-              </CardTitle>
-              <CardDescription className="text-xs">
-                Based on the Grade 7 design – Whole Numbers (20 lessons)
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-xs font-semibold mb-1">By the end, learners should be able to:</p>
-              <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1">
-                <li>
-                  Use place value and total value of digits up to hundreds of
-                  millions in real life.
-                </li>
-                <li>
-                  Read and write numbers in symbols and in words (up to
-                  millions).
-                </li>
-                <li>
-                  Round off numbers up to the nearest hundreds of millions.
-                </li>
-                <li>
-                  Classify natural numbers as even, odd and prime.
-                </li>
-                <li>
-                  Apply operations of whole numbers in real-life situations.
-                </li>
-                <li>
-                  Identify and create number sequences and use IT devices to
-                  explore whole numbers.
-                </li>
-              </ul>
-              <p className="text-xs font-semibold mt-3 mb-1">Suggested learning experiences:</p>
-              <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1">
-                <li>
-                  Use place value apparatus and charts to read, write and round
-                  numbers.
-                </li>
-                <li>
-                  Write numbers in words on cards and practise writing dummy
-                  cheques for different sums of money.
-                </li>
-                <li>
-                  Play games that involve making and sorting number cards into
-                  even, odd and prime.
-                </li>
-                <li>
-                  Use simple digital devices to practise combined operations and
-                  number sequences.
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="border-primary/10 bg-white/60">
-            <CardHeader>
-              <CardTitle className="text-sm">
-                Core Competencies, Values &amp; Assessment Focus
-              </CardTitle>
-              <CardDescription className="text-xs">
-                Summary aligned with the curriculum design
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-xs font-semibold mb-1">Core competencies:</p>
-              <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1">
-                <li>
-                  <span className="font-semibold">Communication &amp; collaboration</span> – pair/group work with
-                  place value charts and rounding.
-                </li>
-                <li>
-                  <span className="font-semibold">Critical thinking &amp; problem solving</span> – identifying and
-                  extending number patterns.
-                </li>
-                <li>
-                  <span className="font-semibold">Creativity &amp; imagination</span> – creating number puzzles and
-                  games involving sequences.
-                </li>
-              </ul>
-
-              <p className="text-xs font-semibold mt-3 mb-1">Values:</p>
-              <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1">
-                <li>Respect and unity as learners work in groups and play number games.</li>
-                <li>Peace as they share roles and support one another.</li>
-              </ul>
-
-              <p className="text-xs font-semibold mt-3 mb-1">Pertinent &amp; contemporary issues:</p>
-              <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1">
-                <li>Financial literacy – writing dummy cheques and large money amounts.</li>
-                <li>Self-esteem – success in creating and solving number puzzles.</li>
-              </ul>
-
-              <p className="text-xs font-semibold mt-3 mb-1">Assessment lens (rubric focus):</p>
-              <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1">
-                <li>
-                  Accurate use of place value and total value up to hundreds of millions.
-                </li>
-                <li>
-                  Correct reading/writing of numbers in symbols and words up to millions.
-                </li>
-                <li>
-                  Correct rounding, correct classification (even/odd/prime), and correct
-                  application of operations and sequences.
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
+        ))}
       </div>
 
-      {/* Additional sub-strands placeholders – to be detailed later */}
-      <div className="space-y-6">
-        <h3 className="text-lg font-semibold text-slate-900">
-          Other sub-strands in Strand 1.0 (to be expanded next)
-        </h3>
-        <p className="text-sm text-muted-foreground max-w-3xl">
-          Next, we will build dedicated blocks for the remaining sub-strands in
-          <span className="font-semibold"> STRAND 1.0: NUMBERS</span>:
-          Factors (1.2), Fractions (1.3), Decimals (1.4) and Squares &amp;
-          Square Roots (1.5), mirroring the learning outcomes, suggested
-          experiences and assessment rubrics in the curriculum design.
-        </p>
-      </div>
+      {/* Quick Navigation */}
+      <Card className="border-dashed border-primary/30 bg-primary/5">
+        <CardHeader>
+          <CardTitle className="text-sm">Quick Navigation</CardTitle>
+          <CardDescription className="text-xs">
+            Start with any sub-strand to begin learning
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-wrap gap-2">
+            {subStrands.map((subStrand) => (
+              <Button
+                key={subStrand.id}
+                asChild
+                variant="secondary"
+                size="sm"
+              >
+                <Link href={`/subjects/math/grade-7/numbers/${subStrand.id}`}>
+                  {subStrand.number} {subStrand.title}
+                </Link>
+              </Button>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
     </section>
   );
 }
-
