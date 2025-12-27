@@ -35,26 +35,25 @@ export default function WholeNumbersPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
-            <Link 
-              href="/subjects/math/grade-7/numbers/whole-numbers/place-value"
-              className="block p-4 rounded-lg hover:bg-primary/10 transition-all border-2 border-primary/30 hover:border-primary/50 bg-primary/5 group"
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-bold text-primary group-hover:text-primary/90">
-                    1.1.1 Place Value of Digits in a Number
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Learn place value with interactive practice →
-                  </p>
+          <div className="space-y-2">
+              <Link 
+                href="/subjects/math/grade-7/numbers/whole-numbers/place-value"
+                className="block p-4 rounded-lg hover:bg-primary/10 transition-all border-2 border-primary/30 hover:border-primary/50 bg-primary/5 group"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-bold text-primary group-hover:text-primary/90">
+                      1.1.1 Place Value of Digits in a Number
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Learn place value with interactive practice →
+                    </p>
+                  </div>
+                  <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    →
+                  </div>
                 </div>
-                <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                  →
-                </div>
-              </div>
-            </Link>
-            <div className="pl-4 space-y-2">
+              </Link>
               <Link 
                 href="/subjects/math/grade-7/numbers/whole-numbers/total-value"
                 className="block p-4 rounded-lg hover:bg-primary/10 transition-all border-2 border-primary/30 hover:border-primary/50 bg-primary/5 group"
@@ -163,14 +162,81 @@ export default function WholeNumbersPage() {
                   </div>
                 </div>
               </Link>
-              <p className="text-xs text-muted-foreground pl-4">1.1.8 Operations of Whole Numbers. Addition and Subtraction</p>
-              <p className="text-xs text-muted-foreground">1.1.9 Operation of Whole Numbers. Multiplication and Division</p>
-              <p className="text-xs text-muted-foreground">1.1.10 Operations of Whole Numbers. Combined Operations</p>
-              <p className="text-xs text-muted-foreground">1.1.11 Number Sequences</p>
-            </div>
+              <Link 
+                href="/subjects/math/grade-7/numbers/whole-numbers/addition-subtraction"
+                className="block p-4 rounded-lg hover:bg-primary/10 transition-all border-2 border-primary/30 hover:border-primary/50 bg-primary/5 group"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-bold text-primary group-hover:text-primary/90">
+                      1.1.8 Operations of Whole Numbers. Addition and Subtraction
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Master addition and subtraction with interactive practice →
+                    </p>
+                  </div>
+                  <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    →
+                  </div>
+                </div>
+              </Link>
+              <Link 
+                href="/subjects/math/grade-7/numbers/whole-numbers/multiplication-division"
+                className="block p-4 rounded-lg hover:bg-primary/10 transition-all border-2 border-primary/30 hover:border-primary/50 bg-primary/5 group"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-bold text-primary group-hover:text-primary/90">
+                      1.1.9 Operation of Whole Numbers. Multiplication and Division
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Master multiplication and division with interactive practice →
+                    </p>
+                  </div>
+                  <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    →
+                  </div>
+                </div>
+              </Link>
+              <Link 
+                href="/subjects/math/grade-7/numbers/whole-numbers/combined-operations"
+                className="block p-4 rounded-lg hover:bg-primary/10 transition-all border-2 border-primary/30 hover:border-primary/50 bg-primary/5 group"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-bold text-primary group-hover:text-primary/90">
+                      1.1.10 Operations of Whole Numbers. Combined Operations
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Master order of operations (BODMAS) with interactive practice →
+                    </p>
+                  </div>
+                  <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    →
+                  </div>
+                </div>
+              </Link>
+              <Link 
+                href="/subjects/math/grade-7/numbers/whole-numbers/number-sequences"
+                className="block p-4 rounded-lg hover:bg-primary/10 transition-all border-2 border-primary/30 hover:border-primary/50 bg-primary/5 group"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-bold text-primary group-hover:text-primary/90">
+                      1.1.11 Number Sequences
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Learn to identify patterns and find missing terms →
+                    </p>
+                  </div>
+                  <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    →
+                  </div>
+                </div>
+              </Link>
           </div>
           <p className="text-xs text-muted-foreground mt-4 italic">
-            Click on topic 1.1.1 to begin learning about place value with interactive practice!
+            Click on any topic to begin learning with interactive practice!
           </p>
         </CardContent>
       </Card>

@@ -3,6 +3,19 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
+const topics = [
+  { id: '1.3.1', title: 'Comparing Fractions', href: '/subjects/math/grade-7/numbers/fractions/comparing-fractions' },
+  { id: '1.3.2', title: 'Adding Fractions', href: '/subjects/math/grade-7/numbers/fractions/adding-fractions' },
+  { id: '1.3.3', title: 'Subtracting Fractions', href: '/subjects/math/grade-7/numbers/fractions/subtracting-fractions' },
+  { id: '1.3.4', title: 'Multiplying a fraction by a whole number', href: '/subjects/math/grade-7/numbers/fractions/multiplying-fraction-whole' },
+  { id: '1.3.5', title: 'Multiplying a fraction by a fraction', href: '/subjects/math/grade-7/numbers/fractions/multiplying-fractions' },
+  { id: '1.3.6', title: 'Reciprocal of a Fraction', href: '/subjects/math/grade-7/numbers/fractions/reciprocal' },
+  { id: '1.3.7', title: 'Dividing a fraction by a whole number', href: '/subjects/math/grade-7/numbers/fractions/dividing-fraction-whole' },
+  { id: '1.3.8', title: 'Dividing a fraction by a fraction', href: '/subjects/math/grade-7/numbers/fractions/dividing-fractions' },
+  { id: '1.3.9', title: 'Dividing a whole number by a fraction', href: '/subjects/math/grade-7/numbers/fractions/dividing-whole-fraction' },
+  { id: '1.3.10', title: 'Number Sequences Involving Fractions', href: '/subjects/math/grade-7/numbers/fractions/fraction-sequences' },
+];
+
 export default function FractionsPage() {
   return (
     <section className="space-y-6">
@@ -36,23 +49,33 @@ export default function FractionsPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
-            <p className="text-xs text-muted-foreground">1.3.1 Comparing Fractions</p>
-            <p className="text-xs text-muted-foreground">1.3.2 Adding Fractions</p>
-            <p className="text-xs text-muted-foreground">1.3.3 Subtracting Fractions</p>
-            <p className="text-xs text-muted-foreground">1.3.4 Multiplying a fraction by a whole number</p>
-            <p className="text-xs text-muted-foreground">1.3.5 Multiplying a fraction by a fraction</p>
-            <p className="text-xs text-muted-foreground">1.3.6 Reciprocal of a Fraction</p>
-            <p className="text-xs text-muted-foreground">1.3.7 Dividing a fraction by a whole number</p>
-            <p className="text-xs text-muted-foreground">1.3.8 Dividing a fraction by a fraction</p>
-            <p className="text-xs text-muted-foreground">1.3.9 Dividing a whole number by a fraction</p>
-            <p className="text-xs text-muted-foreground">1.3.10 Number Sequences Involving Fractions</p>
+            {topics.map((topic) => (
+              <Link
+                key={topic.id}
+                href={topic.href}
+                className="block p-4 rounded-lg hover:bg-primary/10 transition-all border-2 border-primary/30 hover:border-primary/50 bg-primary/5 group"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-bold text-primary group-hover:text-primary/90">
+                      {topic.id} {topic.title}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Learn {topic.title.toLowerCase()} with interactive practice →
+                    </p>
+                  </div>
+                  <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    →
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
           <p className="text-xs text-muted-foreground mt-4 italic">
-            Content for each topic will be added here. Start with topic 1.3.1 to begin learning.
+            Click on any topic to begin learning with interactive practice!
           </p>
         </CardContent>
       </Card>
     </section>
   );
 }
-

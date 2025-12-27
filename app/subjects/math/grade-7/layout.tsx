@@ -9,6 +9,7 @@ const strands = [
   { id: 'measurements', label: 'Measurements', href: '/subjects/math/grade-7/measurements' },
   { id: 'geometry', label: 'Geometry', href: '/subjects/math/grade-7/geometry' },
   { id: 'data', label: 'Data Handling', href: '/subjects/math/grade-7/data' },
+  { id: 'extras', label: 'Extras', href: '/subjects/math/grade-7/extras' },
 ];
 
 export default function Grade7MathLayout({

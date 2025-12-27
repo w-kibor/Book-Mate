@@ -4,37 +4,32 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 const topics = [
-  { id: '1.2.1', title: 'Divisibility test of 2, 3, 4', href: '/subjects/math/grade-7/numbers/factors/divisibility-2-3-4' },
-  { id: '1.2.2', title: 'Divisibility test of 5, 6, 8', href: '/subjects/math/grade-7/numbers/factors/divisibility-5-6-8' },
-  { id: '1.2.3', title: 'Divisibility test of 9, 10, 11', href: '/subjects/math/grade-7/numbers/factors/divisibility-9-10-11' },
-  { id: '1.2.4', title: 'Expressing a Number as a Product of its Prime Factors', href: '/subjects/math/grade-7/numbers/factors/prime-factorization' },
-  { id: '1.2.5', title: 'Greatest Common Divisor (GCD)', href: '/subjects/math/grade-7/numbers/factors/gcd' },
-  { id: '1.2.6', title: 'Applying the Greatest Common Divisor (GCD)', href: '/subjects/math/grade-7/numbers/factors/applying-gcd' },
-  { id: '1.2.7', title: 'Least Common Multiples (LCM)', href: '/subjects/math/grade-7/numbers/factors/lcm' },
-  { id: '1.2.8', title: 'Applying the Least Common Multiples (LCM)', href: '/subjects/math/grade-7/numbers/factors/applying-lcm' },
+  { id: '9.1', title: 'Sides of a Right-angled Triangle', href: '/subjects/math/grade-7/measurements/pythagorean-relationship/sides-right-triangle' },
+  { id: '9.2', title: 'The Pythagorean Relationship', href: '/subjects/math/grade-7/measurements/pythagorean-relationship/pythagorean-theorem' },
+  { id: '9.3', title: 'Applying the Pythagorean Relationship', href: '/subjects/math/grade-7/measurements/pythagorean-relationship/applying-pythagorean' },
 ];
 
-export default function FactorsPage() {
+export default function PythagoreanRelationshipPage() {
   return (
     <section className="space-y-6">
       <div className="flex items-center gap-4">
         <Button asChild variant="ghost" size="sm">
-          <Link href="/subjects/math/grade-7/numbers">
+          <Link href="/subjects/math/grade-7/measurements">
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Numbers
+            Back to Measurements
           </Link>
         </Button>
       </div>
 
       <div className="flex flex-col gap-2">
         <p className="text-xs font-semibold uppercase tracking-wide text-primary">
-          Sub-strand 1.2 • 7 lessons
+          Sub-strand 9.0 • 3 lessons
         </p>
         <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
-          Factors
+          Pythagorean Relationship
         </h2>
         <p className="text-sm text-muted-foreground max-w-3xl">
-          Divisibility tests, prime factorization, Greatest Common Divisor (GCD), and Least Common Multiples (LCM).
+          Understanding the sides of right-angled triangles and applying the Pythagorean theorem to solve problems.
         </p>
       </div>
 
@@ -77,3 +72,4 @@ export default function FactorsPage() {
     </section>
   );
 }
+

@@ -1,3 +1,7 @@
+import Link from 'next/link';
+import { BookOpen, ChevronRight } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -5,9 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { BookOpen, ChevronRight } from 'lucide-react';
 
 type Topic = {
   id: string;
@@ -25,51 +26,20 @@ type SubStrand = {
 
 const subStrands: SubStrand[] = [
   {
-    id: 'algebraic-expressions',
-    number: '6.0',
-    title: 'Algebraic Expressions',
+    id: 'extras',
+    number: '19',
+    title: 'Extras',
     description:
-      'Forming and simplifying algebraic expressions involving addition, subtraction, multiplication, and division.',
-    lessons: 4,
+      'Applied everyday mathematics on service charges, including postal rates and mobile money fees.',
+    lessons: 2,
     topics: [
-      { id: '6.1', title: 'Forming Algebraic Expressions Involving Addition and Subtraction' },
-      { id: '6.2', title: 'Forming Algebraic Expressions Involving Multiplication and Division' },
-      { id: '6.3', title: 'Simplifying Algebraic Expressions Involving Addition and Subtraction' },
-      { id: '6.4', title: 'Simplifying Algebraic Expressions Involving Multiplication' },
-    ],
-  },
-  {
-    id: 'linear-equations',
-    number: '7.0',
-    title: 'Linear Equations',
-    description:
-      'Forming and solving linear equations in one unknown, and applying them to solve real-world problems.',
-    lessons: 4,
-    topics: [
-      { id: '7.1', title: 'Forming Linear Equations in One Unknown Involving Addition and Subtraction' },
-      { id: '7.2', title: 'Forming Linear Equations in One Unknown Involving Multiplication and Division' },
-      { id: '7.3', title: 'Solving Linear Equations in One Unknown' },
-      { id: '7.4', title: 'Applying Linear Equations in One Unknown' },
-    ],
-  },
-  {
-    id: 'linear-inequalities',
-    number: '8.0',
-    title: 'Linear Inequalities',
-    description:
-      'Understanding inequality symbols, forming and solving simple and compound inequalities, and representing them on number lines.',
-    lessons: 5,
-    topics: [
-      { id: '8.1', title: 'Inequality Symbols' },
-      { id: '8.2', title: 'Forming Simple Inequalities in One Unknown' },
-      { id: '8.3', title: 'Showing Simple Inequalities on a Number Line' },
-      { id: '8.4', title: 'Forming Compound Inequalities' },
-      { id: '8.5', title: 'Showing Compound Inequalities on a Number Line' },
+      { id: '19.1', title: 'Postal Charges' },
+      { id: '19.2', title: 'Mobile Money Services Charges' },
     ],
   },
 ];
 
-export default function Grade7AlgebraPage() {
+export default function Grade7ExtrasPage() {
   return (
     <section className="space-y-8">
       {/* Strand Header */}
@@ -77,15 +47,15 @@ export default function Grade7AlgebraPage() {
         <div className="flex items-center gap-3">
           <BookOpen className="h-6 w-6 text-primary" />
           <p className="text-xs font-semibold uppercase tracking-wide text-primary">
-            Strand 2.0
+            Strand 5.0
           </p>
         </div>
         <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
-          Algebra
+          Extras
         </h2>
         <p className="text-sm text-muted-foreground max-w-3xl">
-          This strand covers three sub-strands: Algebraic Expressions, Linear Equations, and Linear Inequalities. 
-          Each sub-strand focuses on forming, simplifying, and solving algebraic problems.
+          Applied math add-ons that reinforce real-life calculations with service
+          fees, preparing learners to reason about charges and cost breakdowns.
         </p>
       </div>
 
@@ -122,12 +92,12 @@ export default function Grade7AlgebraPage() {
                   Topics ({subStrand.topics.length}):
                 </p>
                 <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                  {subStrand.topics.map((topic, index) => (
+                  {subStrand.topics.map((topic) => (
                     <div
                       key={topic.id}
                       className="group flex items-center gap-2 p-3 rounded-lg border border-slate-200 hover:border-primary/40 hover:bg-primary/5 transition-colors"
                     >
-                      <span className="text-xs font-mono text-muted-foreground min-w-[3rem]">
+                      <span className="text-xs font-mono text-muted-foreground min-w-[3.5rem]">
                         {topic.id}
                       </span>
                       <span className="text-sm text-slate-700 group-hover:text-primary transition-colors flex-1">
@@ -144,7 +114,7 @@ export default function Grade7AlgebraPage() {
                     size="sm"
                     className="w-full sm:w-auto"
                   >
-                    <Link href={`/subjects/math/grade-7/algebra/${subStrand.id}`}>
+                    <Link href={`/subjects/math/grade-7/extras/${subStrand.id}`}>
                       Explore {subStrand.title}
                       <ChevronRight className="h-4 w-4 ml-1" />
                     </Link>
@@ -161,19 +131,14 @@ export default function Grade7AlgebraPage() {
         <CardHeader>
           <CardTitle className="text-sm">Quick Navigation</CardTitle>
           <CardDescription className="text-xs">
-            Start with any sub-strand to begin learning
+            Jump to real-life service charge topics
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-2">
             {subStrands.map((subStrand) => (
-              <Button
-                key={subStrand.id}
-                asChild
-                variant="secondary"
-                size="sm"
-              >
-                <Link href={`/subjects/math/grade-7/algebra/${subStrand.id}`}>
+              <Button key={subStrand.id} asChild variant="secondary" size="sm">
+                <Link href={`/subjects/math/grade-7/extras/${subStrand.id}`}>
                   {subStrand.number} {subStrand.title}
                 </Link>
               </Button>

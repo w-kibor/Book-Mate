@@ -3,6 +3,15 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
+const topics = [
+  { id: '1.4.1', title: 'Place Value of Digits in a Decimal', href: '/subjects/math/grade-7/numbers/decimals/place-value' },
+  { id: '1.4.2', title: 'Total Value of Digits in a Decimal', href: '/subjects/math/grade-7/numbers/decimals/total-value' },
+  { id: '1.4.3', title: 'Multiplying a Decimal by a Whole Number', href: '/subjects/math/grade-7/numbers/decimals/multiplying-decimal-whole' },
+  { id: '1.4.4', title: 'Multiplying a Decimal by a Decimal', href: '/subjects/math/grade-7/numbers/decimals/multiplying-decimals' },
+  { id: '1.4.5', title: 'Dividing a Decimal by a Whole Number', href: '/subjects/math/grade-7/numbers/decimals/dividing-decimal-whole' },
+  { id: '1.4.6', title: 'Dividing a Decimal by a Decimal', href: '/subjects/math/grade-7/numbers/decimals/dividing-decimals' },
+];
+
 export default function DecimalsPage() {
   return (
     <section className="space-y-6">
@@ -36,19 +45,33 @@ export default function DecimalsPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
-            <p className="text-xs text-muted-foreground">1.4.1 Place Value of Digits in a Decimal</p>
-            <p className="text-xs text-muted-foreground">1.4.2 Total Value of Digits in a Decimal</p>
-            <p className="text-xs text-muted-foreground">1.4.3 Multiplying a Decimal by a Whole Number</p>
-            <p className="text-xs text-muted-foreground">1.4.4 Multiplying a Decimal by a Decimal</p>
-            <p className="text-xs text-muted-foreground">1.4.5 Dividing a Decimal by a Whole Number</p>
-            <p className="text-xs text-muted-foreground">1.4.6 Dividing a Decimal by a Decimal</p>
+            {topics.map((topic) => (
+              <Link
+                key={topic.id}
+                href={topic.href}
+                className="block p-4 rounded-lg hover:bg-primary/10 transition-all border-2 border-primary/30 hover:border-primary/50 bg-primary/5 group"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-bold text-primary group-hover:text-primary/90">
+                      {topic.id} {topic.title}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Learn {topic.title.toLowerCase()} with interactive practice →
+                    </p>
+                  </div>
+                  <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    →
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
           <p className="text-xs text-muted-foreground mt-4 italic">
-            Content for each topic will be added here. Start with topic 1.4.1 to begin learning.
+            Click on any topic to begin learning with interactive practice!
           </p>
         </CardContent>
       </Card>
     </section>
   );
 }
-

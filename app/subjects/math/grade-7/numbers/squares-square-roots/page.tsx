@@ -3,6 +3,15 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
+const topics = [
+  { id: '1.5.1', title: 'Squares of Whole Numbers', href: '/subjects/math/grade-7/numbers/squares-square-roots/squares-whole-numbers' },
+  { id: '1.5.2', title: 'Squares of Fractions', href: '/subjects/math/grade-7/numbers/squares-square-roots/squares-fractions' },
+  { id: '1.5.3', title: 'Squares of Decimals', href: '/subjects/math/grade-7/numbers/squares-square-roots/squares-decimals' },
+  { id: '1.5.4', title: 'Square Roots of Whole Numbers', href: '/subjects/math/grade-7/numbers/squares-square-roots/square-roots-whole-numbers' },
+  { id: '1.5.5', title: 'Square Roots of Fractions', href: '/subjects/math/grade-7/numbers/squares-square-roots/square-roots-fractions' },
+  { id: '1.5.6', title: 'Square Roots of Decimals', href: '/subjects/math/grade-7/numbers/squares-square-roots/square-roots-decimals' },
+];
+
 export default function SquaresSquareRootsPage() {
   return (
     <section className="space-y-6">
@@ -36,19 +45,33 @@ export default function SquaresSquareRootsPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
-            <p className="text-xs text-muted-foreground">1.5.1 Squares of Whole Numbers</p>
-            <p className="text-xs text-muted-foreground">1.5.2 Squares of Fractions</p>
-            <p className="text-xs text-muted-foreground">1.5.3 Squares of Decimals</p>
-            <p className="text-xs text-muted-foreground">1.5.4 Square Roots of Whole Numbers</p>
-            <p className="text-xs text-muted-foreground">1.5.5 Square Roots of Fractions</p>
-            <p className="text-xs text-muted-foreground">1.5.6 Square Roots of Decimals</p>
+            {topics.map((topic) => (
+              <Link
+                key={topic.id}
+                href={topic.href}
+                className="block p-4 rounded-lg hover:bg-primary/10 transition-all border-2 border-primary/30 hover:border-primary/50 bg-primary/5 group"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-bold text-primary group-hover:text-primary/90">
+                      {topic.id} {topic.title}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Learn {topic.title.toLowerCase()} with interactive practice →
+                    </p>
+                  </div>
+                  <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    →
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
           <p className="text-xs text-muted-foreground mt-4 italic">
-            Content for each topic will be added here. Start with topic 1.5.1 to begin learning.
+            Click on any topic to begin learning with interactive practice!
           </p>
         </CardContent>
       </Card>
     </section>
   );
 }
-

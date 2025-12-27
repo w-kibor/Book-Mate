@@ -4,37 +4,33 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 const topics = [
-  { id: '1.2.1', title: 'Divisibility test of 2, 3, 4', href: '/subjects/math/grade-7/numbers/factors/divisibility-2-3-4' },
-  { id: '1.2.2', title: 'Divisibility test of 5, 6, 8', href: '/subjects/math/grade-7/numbers/factors/divisibility-5-6-8' },
-  { id: '1.2.3', title: 'Divisibility test of 9, 10, 11', href: '/subjects/math/grade-7/numbers/factors/divisibility-9-10-11' },
-  { id: '1.2.4', title: 'Expressing a Number as a Product of its Prime Factors', href: '/subjects/math/grade-7/numbers/factors/prime-factorization' },
-  { id: '1.2.5', title: 'Greatest Common Divisor (GCD)', href: '/subjects/math/grade-7/numbers/factors/gcd' },
-  { id: '1.2.6', title: 'Applying the Greatest Common Divisor (GCD)', href: '/subjects/math/grade-7/numbers/factors/applying-gcd' },
-  { id: '1.2.7', title: 'Least Common Multiples (LCM)', href: '/subjects/math/grade-7/numbers/factors/lcm' },
-  { id: '1.2.8', title: 'Applying the Least Common Multiples (LCM)', href: '/subjects/math/grade-7/numbers/factors/applying-lcm' },
+  { id: '6.1', title: 'Forming Algebraic Expressions Involving Addition and Subtraction', href: '/subjects/math/grade-7/algebra/algebraic-expressions/forming-addition-subtraction' },
+  { id: '6.2', title: 'Forming Algebraic Expressions Involving Multiplication and Division', href: '/subjects/math/grade-7/algebra/algebraic-expressions/forming-multiplication-division' },
+  { id: '6.3', title: 'Simplifying Algebraic Expressions Involving Addition and Subtraction', href: '/subjects/math/grade-7/algebra/algebraic-expressions/simplifying-addition-subtraction' },
+  { id: '6.4', title: 'Simplifying Algebraic Expressions Involving Multiplication', href: '/subjects/math/grade-7/algebra/algebraic-expressions/simplifying-multiplication' },
 ];
 
-export default function FactorsPage() {
+export default function AlgebraicExpressionsPage() {
   return (
     <section className="space-y-6">
       <div className="flex items-center gap-4">
         <Button asChild variant="ghost" size="sm">
-          <Link href="/subjects/math/grade-7/numbers">
+          <Link href="/subjects/math/grade-7/algebra">
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Numbers
+            Back to Algebra
           </Link>
         </Button>
       </div>
 
       <div className="flex flex-col gap-2">
         <p className="text-xs font-semibold uppercase tracking-wide text-primary">
-          Sub-strand 1.2 • 7 lessons
+          Sub-strand 6.0 • 4 lessons
         </p>
         <h2 className="text-2xl md:text-3xl font-bold text-slate-900">
-          Factors
+          Algebraic Expressions
         </h2>
         <p className="text-sm text-muted-foreground max-w-3xl">
-          Divisibility tests, prime factorization, Greatest Common Divisor (GCD), and Least Common Multiples (LCM).
+          Forming and simplifying algebraic expressions involving addition, subtraction, multiplication, and division.
         </p>
       </div>
 
@@ -77,3 +73,4 @@ export default function FactorsPage() {
     </section>
   );
 }
+

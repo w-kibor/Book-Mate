@@ -139,7 +139,7 @@ const subStrands: SubStrand[] = [
   },
 ];
 
-export default function Grade7MeasurementsPage() {
+export default function Grade7MeasurementPage() {
   return (
     <section className="space-y-8">
       {/* Strand Header */}
@@ -151,7 +151,7 @@ export default function Grade7MeasurementsPage() {
           </p>
         </div>
         <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
-          Measurements
+          Measurement
         </h2>
         <p className="text-sm text-muted-foreground max-w-3xl">
           This strand covers seven sub-strands: Pythagorean Relationship, Length, Area, Volume and Capacity, 
@@ -196,7 +196,7 @@ export default function Grade7MeasurementsPage() {
                   {subStrand.topics.map((topic, index) => (
                     <Link
                       key={topic.id}
-                      href={`/subjects/math/grade-7/measurements/${subStrand.id}`}
+                      href={`/subjects/math/grade-7/measurement/${subStrand.id}`}
                       className="group flex items-center gap-2 p-3 rounded-lg border border-slate-200 hover:border-primary/40 hover:bg-primary/5 transition-colors cursor-pointer"
                     >
                       <span className="text-xs font-mono text-muted-foreground min-w-[3rem]">
@@ -216,7 +216,7 @@ export default function Grade7MeasurementsPage() {
                     size="sm"
                     className="w-full sm:w-auto"
                   >
-                    <Link href={`/subjects/math/grade-7/measurements/${subStrand.id}`}>
+                    <Link href={`/subjects/math/grade-7/measurement/${subStrand.id}`}>
                       Explore {subStrand.title}
                       <ChevronRight className="h-4 w-4 ml-1" />
                     </Link>
@@ -245,7 +245,7 @@ export default function Grade7MeasurementsPage() {
                 variant="secondary"
                 size="sm"
               >
-                <Link href={`/subjects/math/grade-7/measurements/${subStrand.id}`}>
+                <Link href={`/subjects/math/grade-7/measurement/${subStrand.id}`}>
                   {subStrand.number} {subStrand.title}
                 </Link>
               </Button>
@@ -256,3 +256,4 @@ export default function Grade7MeasurementsPage() {
     </section>
   );
 }
+
