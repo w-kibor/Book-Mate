@@ -212,7 +212,7 @@ The app is configured as a Progressive Web App with:
 
 ## Next Steps
 
-1. Add authentication pages (sign up, password reset)
+1. Add authentication pages (sign up, password reset, security update)
 2. Implement file upload for practical activities
 3. Add more interactive learning components
 4. Implement progress analytics
