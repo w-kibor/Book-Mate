@@ -1,20 +1,20 @@
 # Book Mate - CBC Learning Platform
 
-A Progressive Web App (PWA) for CBC-aligned learning for Kenyan Junior School (Grade 7-9) focusing on Mathematics and Integrated Science.
+A CBC-aligned learning platform for Kenyan Junior School (Grade 7-9) focusing on Mathematics and Integrated Science.
 
 ## Tech Stack
 
 - **Framework**: Next.js 15 (App Router) with TypeScript
 - **Styling**: Tailwind CSS + Shadcn/UI (Mobile-first design)
 - **Backend/Auth**: Supabase (PostgreSQL) for Auth, Database, and Storage
-- **PWA**: next-pwa for offline caching and "Add to Home Screen" functionality
+- **App Metadata**: Web manifest, theme color, and Apple touch icon support
 - **Math Rendering**: KaTeX for high-performance mathematical notation
 
 ## Features
 
 - 📚 **Curriculum Hierarchy**: Grades → Subjects → Strands → Sub-strands → Lessons
 - 📊 **Progress Tracking**: Tracks completion of sub-strands and formative assessment scores
-- 📱 **Offline-First**: PWA with offline caching and status indicators
+- 📱 **Offline Status**: Shows when the browser loses network connectivity
 - 🧮 **Math Support**: KaTeX rendering for mathematical formulas
 - 📝 **Assessments**: Multiple-choice and practical activity uploads
 - 🎨 **Modern UI**: Mobile-first design with Royal Blue (#1E3A8A) and Sunny Yellow (#FACC15) color scheme
@@ -187,14 +187,14 @@ npm run dev
 ├── lib/                   # Utility functions
 │   └── supabase/         # Supabase client configuration
 ├── types/                 # TypeScript type definitions
-└── public/                # Static assets and PWA files
+└── public/                # Static assets and app metadata
 ```
 
 ## Key Components
 
 - **MathRenderer**: Renders mathematical formulas using KaTeX
 - **QuizComponent**: Handles multiple-choice and practical activity assessments
-- **OfflineIndicator**: Shows online/offline status
+- **OfflineIndicator**: Shows a banner when the browser is offline
 - **Dashboard**: Student home page with subject cards
 
 ## Color Scheme
@@ -202,13 +202,12 @@ npm run dev
 - **Primary**: #1E3A8A (Royal Blue)
 - **Accent**: #FACC15 (Sunny Yellow)
 
-## PWA Features
+## App Metadata
 
-The app is configured as a Progressive Web App with:
-- Offline caching via service worker
-- "Add to Home Screen" capability
-- Network-first caching strategy
-- Manifest.json for app metadata
+The app includes browser metadata support with:
+- `manifest.json` for app metadata
+- Theme color and Apple touch icon metadata in the layout
+- `OfflineIndicator` for connection status feedback
 
 ## Next Steps
 
@@ -217,7 +216,7 @@ The app is configured as a Progressive Web App with:
 3. Add more interactive learning components
 4. Implement progress analytics
 5. Add teacher/admin dashboard
-6. Create PWA icons (icon-192x192.png, icon-512x512.png)
+6. Create app icons (icon-192x192.png, icon-512x512.png)
 
 ## License
 
