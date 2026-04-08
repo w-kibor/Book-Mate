@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -21,7 +20,6 @@ export function SignupForm() {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const router = useRouter();
-  const supabase = createClient();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,19 +34,25 @@ export function SignupForm() {
     }
 
     try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
       });
 
-      if (error) throw error;
-
-      if (data.session) {
-        router.push('/dashboard');
-        router.refresh();
-      } else {
-        setMessage('Check your email to confirm your account, then sign in.');
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to sign up');
       }
+
+      setMessage('Account created successfully. Redirecting...');
+      router.push('/dashboard');
+      router.refresh();
     } catch (err: any) {
       setError(err.message || 'An error occurred during sign up');
     } finally {

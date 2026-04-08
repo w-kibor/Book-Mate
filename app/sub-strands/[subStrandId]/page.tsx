@@ -1,4 +1,10 @@
-import { createClient } from '@/lib/supabase/server';
+import { requireSessionUser } from '@/lib/auth/session';
+import {
+  getProgress,
+  getStrandById,
+  getSubStrandById,
+  getLessonsBySubStrandId,
+} from '@/lib/mongodb/repositories';
 import { redirect } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
@@ -10,53 +16,25 @@ interface SubStrandPageProps {
 
 export default async function SubStrandPage({ params }: SubStrandPageProps) {
   const { subStrandId } = await params;
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await requireSessionUser();
 
-  if (!user) {
-    redirect('/login');
-  }
-
-  // Fetch sub-strand with lessons
-  const { data: subStrand } = await supabase
-    .from('sub_strands')
-    .select(`
-      *,
-      strands (
-        id,
-        name,
-        subject_id
-      )
-    `)
-    .eq('id', subStrandId)
-    .single();
+  const subStrand = await getSubStrandById(subStrandId);
 
   if (!subStrand) {
     redirect('/dashboard');
   }
 
-  // Fetch lessons
-  const { data: lessons } = await supabase
-    .from('lessons')
-    .select('*')
-    .eq('sub_strand_id', subStrandId)
-    .order('order');
+  const lessons = await getLessonsBySubStrandId(subStrandId);
 
-  // Check progress
-  const { data: progress } = await supabase
-    .from('student_progress')
-    .select('completed, formative_assessment_score')
-    .eq('user_id', user.id)
-    .eq('sub_strand_id', subStrandId)
-    .single();
+  const strand = await getStrandById(subStrand.strand_id);
+
+  const progress = await getProgress(user.id, subStrandId);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         <Link
-          href={`/strands/${subStrand.strand_id}`}
+          href={`/strands/${strand?.id || subStrand.strand_id}`}
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6"
         >
           <ArrowLeft className="h-4 w-4" />

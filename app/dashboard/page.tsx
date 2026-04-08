@@ -1,25 +1,14 @@
-import { createClient } from '@/lib/supabase/server';
-import { redirect } from 'next/navigation';
+import { requireSessionUser } from '@/lib/auth/session';
+import { getProfileByUserId } from '@/lib/mongodb/repositories';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { BookOpen, Calculator } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function DashboardPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect('/login');
-  }
+  const user = await requireSessionUser();
 
   // Fetch user's grade (default to 7 if not set)
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('grade_id')
-    .eq('id', user.id)
-    .single();
+  const profile = await getProfileByUserId(user.id);
 
   const currentGrade = profile?.grade_id || '7'; // Default to Grade 7
 

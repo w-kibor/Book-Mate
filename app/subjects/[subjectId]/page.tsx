@@ -1,4 +1,5 @@
-import { createClient } from '@/lib/supabase/server';
+import { requireSessionUser } from '@/lib/auth/session';
+import { getStrandsBySubjectCode } from '@/lib/mongodb/repositories';
 import { redirect } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
@@ -10,14 +11,7 @@ interface SubjectPageProps {
 
 export default async function SubjectPage({ params }: SubjectPageProps) {
   const { subjectId } = await params;
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect('/login');
-  }
+  await requireSessionUser();
 
   // Map subject IDs to codes
   const subjectMap: Record<string, string> = {
@@ -31,12 +25,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
     redirect('/dashboard');
   }
 
-  // Fetch strands for this subject (subject_id references subjects.code)
-  const { data: strands } = await supabase
-    .from('strands')
-    .select('*')
-    .eq('subject_id', subjectCode)
-    .order('order');
+  const strands = await getStrandsBySubjectCode(subjectCode);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4 md:p-8">

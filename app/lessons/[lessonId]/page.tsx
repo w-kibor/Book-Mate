@@ -1,4 +1,9 @@
-import { createClient } from '@/lib/supabase/server';
+import { requireSessionUser } from '@/lib/auth/session';
+import {
+  getLessonById,
+  getLessonsBySubStrandId,
+  getProgress,
+} from '@/lib/mongodb/repositories';
 import { redirect } from 'next/navigation';
 import { MathContent } from '@/components/math/math-renderer';
 import { Card, CardContent } from '@/components/ui/card';
@@ -12,52 +17,17 @@ interface LessonPageProps {
 
 export default async function LessonPage({ params }: LessonPageProps) {
   const { lessonId } = await params;
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await requireSessionUser();
 
-  if (!user) {
-    redirect('/login');
-  }
-
-  // Fetch lesson data
-  const { data: lesson } = await supabase
-    .from('lessons')
-    .select(`
-      *,
-      sub_strands (
-        id,
-        name,
-        strand_id,
-        strands (
-          id,
-          name,
-          subject_id
-        )
-      )
-    `)
-    .eq('id', lessonId)
-    .single();
+  const lesson = await getLessonById(lessonId);
 
   if (!lesson) {
     redirect('/dashboard');
   }
 
-  // Fetch all lessons in the same sub-strand for navigation
-  const { data: allLessons } = await supabase
-    .from('lessons')
-    .select('id, title, order')
-    .eq('sub_strand_id', lesson.sub_strand_id)
-    .order('order');
+  const allLessons = await getLessonsBySubStrandId(lesson.sub_strand_id);
 
-  // Check if lesson is completed
-  const { data: progress } = await supabase
-    .from('student_progress')
-    .select('completed')
-    .eq('user_id', user.id)
-    .eq('sub_strand_id', lesson.sub_strand_id)
-    .single();
+  const progress = await getProgress(user.id, lesson.sub_strand_id);
 
   return (
     <div className="min-h-screen bg-background">

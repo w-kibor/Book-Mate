@@ -1,5 +1,5 @@
-import { createClient } from '@/lib/supabase/server';
-import { redirect } from 'next/navigation';
+import { requireSessionUser } from '@/lib/auth/session';
+import { getAssessmentBySubStrandId, upsertProgress } from '@/lib/mongodb/repositories';
 import { QuizComponent } from '@/components/assessment/quiz-component';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -9,21 +9,9 @@ interface AssessmentPageProps {
 
 export default async function AssessmentPage({ params }: AssessmentPageProps) {
   const { subStrandId } = await params;
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  await requireSessionUser();
 
-  if (!user) {
-    redirect('/login');
-  }
-
-  // Fetch assessment data
-  const { data: assessment } = await supabase
-    .from('assessments')
-    .select('*')
-    .eq('sub_strand_id', subStrandId)
-    .single();
+  const assessment = await getAssessmentBySubStrandId(subStrandId);
 
   if (!assessment) {
     return (
@@ -49,13 +37,8 @@ export default async function AssessmentPage({ params }: AssessmentPageProps) {
 
   async function handleSubmit(answers: Record<string, string | File>) {
     'use server';
-    
-    const supabase = await createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
 
-    if (!user) return;
+    const user = await requireSessionUser();
 
     // Calculate score for multiple choice questions
     let score = 0;
@@ -72,17 +55,13 @@ export default async function AssessmentPage({ params }: AssessmentPageProps) {
 
     const percentage = totalMCQ > 0 ? (score / totalMCQ) * 100 : 0;
 
-    // Update or insert progress
-    await supabase.from('student_progress').upsert({
-      user_id: user.id,
-      sub_strand_id: subStrandId,
-      completed: true,
-      completion_date: new Date().toISOString(),
-      formative_assessment_score: percentage,
+    await upsertProgress({
+      userId: user.id,
+      subStrandId,
+      percentage,
     });
 
-    // TODO: Handle file uploads for practical activities
-    // This would require Supabase Storage integration
+    // TODO: Handle practical activity uploads with MongoDB GridFS or external object storage.
   }
 
   return (

@@ -1,4 +1,5 @@
-import { createClient } from '@/lib/supabase/server';
+import { requireSessionUser } from '@/lib/auth/session';
+import { getStrandById, getSubStrandsByStrandId } from '@/lib/mongodb/repositories';
 import { redirect } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
@@ -10,32 +11,15 @@ interface StrandPageProps {
 
 export default async function StrandPage({ params }: StrandPageProps) {
   const { strandId } = await params;
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  await requireSessionUser();
 
-  if (!user) {
-    redirect('/login');
-  }
-
-  // Fetch strand with sub-strands
-  const { data: strand } = await supabase
-    .from('strands')
-    .select('*')
-    .eq('id', strandId)
-    .single();
+  const strand = await getStrandById(strandId);
 
   if (!strand) {
     redirect('/dashboard');
   }
 
-  // Fetch sub-strands
-  const { data: subStrands } = await supabase
-    .from('sub_strands')
-    .select('*')
-    .eq('strand_id', strandId)
-    .order('order');
+  const subStrands = await getSubStrandsByStrandId(strandId);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-yellow-50 p-4 md:p-8">
