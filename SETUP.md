@@ -20,10 +20,10 @@
    - Run the SQL schema provided in `README.md` to create all tables
    - Ensure Row Level Security (RLS) policies are set up correctly
 
-4. **Create PWA Icons** (Optional but recommended)
+4. **Create App Icons** (Optional but recommended)
    - Create `public/icon-192x192.png` (192x192 pixels)
    - Create `public/icon-512x512.png` (512x512 pixels)
-   - These icons will be used for the "Add to Home Screen" feature
+   - These icons are used by the app manifest and browser metadata
 
 5. **Run Development Server**
    ```bash
@@ -52,21 +52,21 @@ Book Mate/
 │   ├── math/                # KaTeX math rendering components
 │   ├── assessment/         # Quiz and assessment components
 │   ├── auth/                # Login/signup forms
-│   └── offline-indicator.tsx # PWA offline status indicator
+│   └── offline-indicator.tsx # Offline status indicator
 ├── lib/
 │   ├── supabase/           # Supabase client configuration
 │   └── utils.ts            # Utility functions
 ├── types/
 │   └── database.types.ts   # TypeScript types for Supabase
 └── public/
-    └── manifest.json        # PWA manifest
+   └── manifest.json        # App manifest
 ```
 
 ## Key Features Implemented
 
 ✅ **Next.js 15 App Router** with TypeScript
 ✅ **Supabase Integration** (Auth, Database, Storage ready)
-✅ **PWA Configuration** (manifest.json, service worker via next-pwa)
+✅ **Browser Metadata** (manifest.json, theme color, Apple touch icon)
 ✅ **KaTeX Math Rendering** (MathRenderer component)
 ✅ **Offline Indicator** (shows connection status)
 ✅ **Dashboard** (subject cards for Math and Integrated Science)
@@ -80,7 +80,7 @@ Book Mate/
 
 1. **Add Sample Data**: Populate your Supabase database with curriculum content
 2. **Create User Accounts**: Set up authentication for students
-3. **Add PWA Icons**: Create the icon files for better PWA experience
+3. **Add App Icons**: Create the icon files for better browser metadata support
 4. **Implement File Uploads**: Complete the practical activity file upload feature
 5. **Add More Features**: 
    - Progress analytics
@@ -89,7 +89,7 @@ Book Mate/
    - Discussion forums
    - Notifications
 
-## Testing the PWA
+## Verifying Browser Metadata
 
 1. Build the production version:
    ```bash
@@ -99,15 +99,13 @@ Book Mate/
 
 2. In Chrome/Edge:
    - Open DevTools (F12)
-   - Go to Application tab
-   - Check "Service Workers" and "Manifest"
-   - Use "Add to Home Screen" to test PWA installation
+   - Go to the Application tab
+   - Check the Manifest and icon references
 
 ## Troubleshooting
 
 - **Supabase Connection Issues**: Verify your environment variables are set correctly
 - **Type Errors**: Run `npm install` to ensure all dependencies are installed
-- **PWA Not Working**: Ensure you're running a production build (`npm run build && npm start`)
 - **Math Not Rendering**: Check that KaTeX CSS is loaded (should be automatic)
 
 ## Support
