@@ -6,10 +6,6 @@ const SESSION_COOKIE_NAME = 'bookmate_session';
 const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
 const jwtSecret = process.env.JWT_SECRET;
 
-if (!jwtSecret) {
-  throw new Error('Missing JWT_SECRET environment variable.');
-}
-
 export interface SessionUser {
   id: string;
   email: string;

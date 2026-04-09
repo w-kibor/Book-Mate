@@ -5,23 +5,28 @@ declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-const uri = process.env.MONGODB_URI;
 const dbName = process.env.MONGODB_DB_NAME || 'book_mate';
-
-if (!uri) {
-  throw new Error('Missing MONGODB_URI environment variable.');
-}
 
 let clientPromise: Promise<MongoClient>;
 
+function getMongoUri(): string {
+  const uri = process.env.MONGODB_URI;
+
+  if (!uri) {
+    throw new Error('Missing MONGODB_URI environment variable.');
+  }
+
+  return uri;
+}
+
 if (process.env.NODE_ENV === 'development') {
   if (!global._mongoClientPromise) {
-    const client = new MongoClient(uri);
+    const client = new MongoClient(getMongoUri());
     global._mongoClientPromise = client.connect();
   }
   clientPromise = global._mongoClientPromise;
 } else {
-  const client = new MongoClient(uri);
+  const client = new MongoClient(getMongoUri());
   clientPromise = client.connect();
 }
 

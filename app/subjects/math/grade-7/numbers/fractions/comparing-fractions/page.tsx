@@ -100,7 +100,7 @@ export default function ComparingFractionsPage() {
                   <p className="text-slate-700">LCM of 4 and 8 = 8</p>
                   
                   <p className="font-semibold text-slate-700 mt-3">Step 2: Convert both fractions</p>
-                  <p className="text-slate-700"><MathRenderer display={false}>$\frac{3}{4} = \frac{3 \times 2}{4 \times 2} = \frac{6}{8}$</MathRenderer></p>
+                  <p className="text-slate-700"><MathRenderer display={false}>{String.raw`$\frac{3}{4} = \frac{3 \times 2}{4 \times 2} = \frac{6}{8}$`}</MathRenderer></p>
                   <p className="text-slate-700"><MathRenderer display={false}>$\frac{5}{8} = \frac{5}{8}$</MathRenderer> (already has denominator 8)</p>
                   
                   <p className="font-semibold text-slate-700 mt-3">Step 3: Compare numerators</p>
@@ -119,8 +119,8 @@ export default function ComparingFractionsPage() {
                   <p className="text-slate-700">LCM of 5 and 7 = 35</p>
                   
                   <p className="font-semibold text-slate-700 mt-3">Step 2: Convert both fractions</p>
-                  <p className="text-slate-700"><MathRenderer display={false}>$\frac{2}{5} = \frac{2 \times 7}{5 \times 7} = \frac{14}{35}$</MathRenderer></p>
-                  <p className="text-slate-700"><MathRenderer display={false}>$\frac{3}{7} = \frac{3 \times 5}{7 \times 5} = \frac{15}{35}$</MathRenderer></p>
+                  <p className="text-slate-700"><MathRenderer display={false}>{String.raw`$\frac{2}{5} = \frac{2 \times 7}{5 \times 7} = \frac{14}{35}$`}</MathRenderer></p>
+                  <p className="text-slate-700"><MathRenderer display={false}>{String.raw`$\frac{3}{7} = \frac{3 \times 5}{7 \times 5} = \frac{15}{35}$`}</MathRenderer></p>
                   
                   <p className="font-semibold text-slate-700 mt-3">Step 3: Compare numerators</p>
                   <p className="text-slate-700"><MathRenderer display={false}>$\frac{14}{35} &lt; \frac{15}{35}$</MathRenderer> because 14 &lt; 15</p>
