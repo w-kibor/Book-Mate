@@ -9,16 +9,16 @@
 
 2. **Configure Environment Variables**
    - Copy `.env.example` to `.env.local`
-   - Add your Supabase credentials:
+   - Add your MongoDB and JWT settings:
      ```
-     NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-     NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+     MONGODB_URI=your_mongodb_connection_string
+     MONGODB_DB_NAME=book_mate
+     JWT_SECRET=your_long_random_secret
      ```
 
-3. **Set Up Supabase Database**
-   - Go to your Supabase project SQL Editor
-   - Run the SQL schema provided in `README.md` to create all tables
-   - Ensure Row Level Security (RLS) policies are set up correctly
+3. **Seed MongoDB Collections**
+   - Create or import the collections listed in `README.md`
+   - Ensure the `users`, `profiles`, `subjects`, `strands`, `sub_strands`, `lessons`, `assessments`, and `student_progress` collections exist
 
 4. **Create App Icons** (Optional but recommended)
    - Create `public/icon-192x192.png` (192x192 pixels)
@@ -33,7 +33,7 @@
 6. **Access the Application**
    - Open [http://localhost:3000](http://localhost:3000)
    - You'll be redirected to `/login` if not authenticated
-   - Create a test user in Supabase Auth or use the Supabase dashboard
+   - Sign up through the app to create a test user in MongoDB
 
 ## Project Structure Overview
 
@@ -54,10 +54,9 @@ Book Mate/
 │   ├── auth/                # Login/signup forms
 │   └── offline-indicator.tsx # Offline status indicator
 ├── lib/
-│   ├── supabase/           # Supabase client configuration
+│   ├── auth/               # Cookie session helpers
+│   ├── mongodb/            # MongoDB connection and repositories
 │   └── utils.ts            # Utility functions
-├── types/
-│   └── database.types.ts   # TypeScript types for Supabase
 └── public/
    └── manifest.json        # App manifest
 ```
@@ -65,7 +64,7 @@ Book Mate/
 ## Key Features Implemented
 
 ✅ **Next.js 15 App Router** with TypeScript
-✅ **Supabase Integration** (Auth, Database, Storage ready)
+✅ **MongoDB Integration** (auth, curriculum data, progress tracking)
 ✅ **Browser Metadata** (manifest.json, theme color, Apple touch icon)
 ✅ **KaTeX Math Rendering** (MathRenderer component)
 ✅ **Offline Indicator** (shows connection status)
@@ -79,6 +78,7 @@ Book Mate/
 ## Next Steps
 
 1. **Add Sample Data**: Populate your Supabase database with curriculum content
+1. **Add Sample Data**: Populate your MongoDB collections with curriculum content
 2. **Create User Accounts**: Set up authentication for students
 3. **Add App Icons**: Create the icon files for better browser metadata support
 4. **Implement File Uploads**: Complete the practical activity file upload feature
@@ -104,7 +104,7 @@ Book Mate/
 
 ## Troubleshooting
 
-- **Supabase Connection Issues**: Verify your environment variables are set correctly
+- **MongoDB Connection Issues**: Verify `MONGODB_URI` and `JWT_SECRET` are set correctly
 - **Type Errors**: Run `npm install` to ensure all dependencies are installed
 - **Math Not Rendering**: Check that KaTeX CSS is loaded (should be automatic)
 
