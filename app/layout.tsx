@@ -9,18 +9,19 @@ export const metadata: Metadata = {
   title: 'Book Mate - CBC Learning Platform',
   description: 'CBC-aligned learning platform for Kenyan Junior School (Grade 7-9)',
   manifest: '/manifest.json',
-  themeColor: '#1E3A8A',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
     title: 'Book Mate',
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-  },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: '#1E3A8A',
 };
 
 export default function RootLayout({
